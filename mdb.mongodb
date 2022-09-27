@@ -1,0 +1,49 @@
+db.users.insertOne({
+	"username": "john07",
+	"password": "12345",
+	"status": {
+		"wins": 21,
+		"loses": 3
+	}
+})
+
+db.users.insertOne({
+	"username": "maria50",
+	"password": "4321",
+	"status": {
+		"wins": 1024,
+		"loses": 2
+	}
+})
+
+db.customers.insertOne({
+	"username": "aaa",
+	"password": "4321",
+	"status": {
+		"wins": 1024,
+		"loses": 2
+	}
+})
+
+db.users.find()
+
+db.users.findOne({"password": "12345"})
+db.users.find({"username": "maria50"})
+
+db.users.find({ "status.wins": {$gt: 50}})
+
+db.user.update({"username": "maria50"}, {"$set": {"password": "777777777777777"}})
+db.user.updateo
+
+db.user.deleteOne({"password": "12345"})
+
+db.user.aggregate( [
+   { $unwind: "$username" },
+   {
+     $group: {
+       _id: "$username",
+       "password": { $count: { } }
+     }
+   },
+   { $sort: { "status.wins": -1 } }
+] )
